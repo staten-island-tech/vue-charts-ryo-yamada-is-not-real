@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <hi></hi>
-  </div>
+    <div>
+        <p>hi</p>
+    </div>
 </template>
 
 <script setup>
-  import hi from '@/components/hi.vue'
+    console.log("hi")
 </script>
 
 <style scoped>
