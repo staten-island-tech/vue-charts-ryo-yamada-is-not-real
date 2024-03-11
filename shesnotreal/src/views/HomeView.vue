@@ -1,13 +1,9 @@
-<template>
-  <div>
-
-  </div>
-</template>
-
 <script setup>
-
+import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<template>
+  <main>
+    <TheWelcome />
+  </main>
+</template>
