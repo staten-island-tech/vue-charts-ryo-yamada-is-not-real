@@ -29,28 +29,31 @@ const map = ref(null);
   });
 }
  */
-function makeMap() {
-  new window.google.maps.Map(map.value, {
+async function makeMap() {
+  const { Map } = await google.maps.importLibrary("maps");
+ map.value = new Map(map.value, {
     center: { lat: 40.785091, lng: -73.968285 },
     zoom: 15,
     mapId: "4504f8b37365c3d0"
   });
 }
 
-function makeMarker(){
+async function makeMarker(){
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   new AdvancedMarkerElement({
     map,
-    position: { lat: 40.785091, lng: -73.968285 },
-  });
+    position: { lat: 40.785091, lng: -73.968285 }
+  })
 }
 
 onMounted(() =>
   makeMap(),
-/*   makeMarker()
- */)
+)
 
 dox()
-
+/* onMounted(()=>
+makeMarker()
+) */
 
 
 
