@@ -31,20 +31,20 @@ const map = ref(null);
  */
 async function makeMap() {
   const { Map } = await google.maps.importLibrary("maps");
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
  map.value = new Map(map.value, {
     center: { lat: 40.785091, lng: -73.968285 },
     zoom: 15,
     mapId: "4504f8b37365c3d0"
   });
-}
-
-async function makeMarker(){
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   new AdvancedMarkerElement({
-    map,
+    map:map.value,
     position: { lat: 40.785091, lng: -73.968285 }
   })
 }
+
+
 
 onMounted(() =>
   makeMap(),
