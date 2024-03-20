@@ -46,10 +46,7 @@ async function makeMap() {
 
 
 
-onMounted(() =>
-  makeMap(),
-)
-
+makeMap()
 dox()
 /* onMounted(()=>
 makeMarker()
