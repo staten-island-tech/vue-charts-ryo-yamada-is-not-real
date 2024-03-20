@@ -1,7 +1,14 @@
 <template>
-  <h1>
-    <div ref="map" class="map"></div>
-  </h1>
+ 
+ <GoogleMap
+  api-key="AIzaSyAdB40-VhUUD6iG5RxtfbroGYMJk-Bn8m0"
+  style="width: 100%; height: 500px"
+  :center="center"
+  :zoom="15"
+  >
+    <Marker :options="{ position: center }" />
+  </GoogleMap>
+
   <squirrelData v-for="idiots in squirrels" :key="idiots.unique_squirrel_id" :-squirrel="idiots" />
 
 </template>
@@ -18,47 +25,19 @@ async function dox() {
   console.log(squirrels.value)
 }
 
-const map = ref(null);
+import { GoogleMap, Marker } from 'vue3-google-map'
 
-/* async function initMap() {
-  const { Map } = await google.maps.importLibrary("maps");
-
-  map = new Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-  });
-}
- */
-async function makeMap() {
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
- map.value = new Map(map.value, {
-    center: { lat: 40.785091, lng: -73.968285 },
-    zoom: 15,
-    mapId: "4504f8b37365c3d0"
-  });
-  new AdvancedMarkerElement({
-    map:map.value,
-    position: { lat: 40.785091, lng: -73.968285 }
-  })
-}
+const center ={ lat: 40.785091, lng: -73.968285 }
 
 
 
-makeMap()
 dox()
-/* onMounted(()=>
-makeMarker()
-) */
+
 
 
 
 </script>
 
 <style lang="scss" scoped>
-.map {
-  width: 500px;
-  height: 500px;
-}
+
 </style>
