@@ -7,6 +7,9 @@
   :zoom="15"
   >
     <Marker :options="{ position: center }" />
+    <Marker :options="{ position: {lat: 40.7837825208444, lng: -73.9688574691102} }" />
+
+
   </GoogleMap>
 
   <squirrelData v-for="idiots in squirrels" :key="idiots.unique_squirrel_id" :-squirrel="idiots" />
@@ -14,6 +17,7 @@
 </template>
 
 <script setup>
+import { GoogleMap, Marker } from 'vue3-google-map'
 import { ref, onBeforeMount, onMounted } from 'vue';
 import squirrelData from '@/components/squirrelData.vue';
 
@@ -25,14 +29,12 @@ async function dox() {
   console.log(squirrels.value)
 }
 
-import { GoogleMap, Marker } from 'vue3-google-map'
 
-const center ={ lat: 40.785091, lng: -73.968285 }
+const center ={ lat: 40.78292600137983, lng: -73.9654160492904 }
 
-
-
+onMounted(()=>
 dox()
-
+)
 
 
 
