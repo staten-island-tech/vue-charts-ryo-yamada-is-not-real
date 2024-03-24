@@ -1,29 +1,30 @@
 <template>
-<button @click="dox">dox </button>
 
-<div v-for="idiots in squ" :key="idiots.unique_squirrel_id">
-  <h2 v-if="loaded">{{ squ[1].geocoded_column.coordinates}}</h2>
+<div class="doxButton">
+  <button @click="dox">dox </button>
 </div>
+    <div class="map">
+  <GoogleMap v-if="loaded" api-key="AIzaSyAdB40-VhUUD6iG5RxtfbroGYMJk-Bn8m0" style="width: 500px; height: 500px" :center="center"
+  :zoom="15">
+  <Marker :options="{ position: center }" />
+    <Marker
+        v-if="loaded"
+        v-for="(idiots,i) in squ"
+        :key="i"
+        :options="{ position: {lat: idiots.geocoded_column.coordinates[1], lng:idiots.geocoded_column.coordinates[0] }}"
+      />
 
-<!--  <GoogleMap
-  api-key="AIzaSyAdB40-VhUUD6iG5RxtfbroGYMJk-Bn8m0"
-  style="width: 100%; height: 500px"
-  :center="center"
-  :zoom="15"
-  >
-    <Marker :options="{ position: center }" />
-    <Marker :options="{ position: {lat: 40.7837825208444, lng: -73.9688574691102} }" />
+  </GoogleMap> 
+</div>
   
 
-  </GoogleMap>
 
-  <squirrelData v-for="idiots in squ" :key="idiots.unique_squirrel_id" :-squirrel="idiots" />
-  -->
+
 </template>
 
-<script >
+<script>
 import { GoogleMap, Marker } from 'vue3-google-map'
-import { ref, onBeforeMount,  } from 'vue';
+import { ref, onBeforeMount, } from 'vue';
 import squirrelData from '@/components/squirrelData.vue';
 /* async function dox() {
   let slop = await fetch("https://data.cityofnewyork.us/resource/vfnx-vebw.json?$limit=10")
@@ -33,44 +34,46 @@ import squirrelData from '@/components/squirrelData.vue';
 }
  */
 
-const center ={ lat: 40.78292600137983, lng: -73.9654160492904 }
 
 export default {
+  components:{
+    GoogleMap,
+    Marker
+  },
   data() {
     return {
       squ: [],
-      loaded: false
+      loaded: false,
+      center: { lat: 40.78292600137983, lng: -73.9654160492904 }
+
     }
   },
-    onMounted: function(){
+  onMounted: function () {
     this.dox()
-  },   
+  },
   methods: {
 
-    dox: async function(){
+    dox: async function () {
       try {
         let slop = await fetch("https://data.cityofnewyork.us/resource/vfnx-vebw.json?$limit=10")
-  let data = await slop.json();
-  this.squ = data;
-  console.log(this.squ)
-  this.loaded = true
+        let data = await slop.json();
+        this.squ = data;
+        console.log(this.squ)
+        this.loaded = true
       } catch (error) {
-        
+
       }
- 
-}
-
     }
-  } 
 
-
-
-
-
-
+  }
+}
 
 </script>
 
 <style lang="scss" scoped>
-
+.doxButton{
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+}
 </style>
