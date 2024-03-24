@@ -1,11 +1,6 @@
 <template>
-<button @click="dox">dox </button>
-
-<div v-for="idiots in squ" :key="idiots.unique_squirrel_id">
-  <h2 v-if="loaded">{{ squ[1].geocoded_column.coordinates}}</h2>
-</div>
-
-<!--  <GoogleMap
+ 
+ <GoogleMap
   api-key="AIzaSyAdB40-VhUUD6iG5RxtfbroGYMJk-Bn8m0"
   style="width: 100%; height: 500px"
   :center="center"
@@ -17,52 +12,48 @@
 
   </GoogleMap>
 
-  <squirrelData v-for="idiots in squ" :key="idiots.unique_squirrel_id" :-squirrel="idiots" />
-  -->
+  <squirrelData v-for="idiots in squirrels" :key="idiots.unique_squirrel_id" :-squirrel="idiots" />
+
 </template>
 
 <script >
 import { GoogleMap, Marker } from 'vue3-google-map'
-import { ref, onBeforeMount,  } from 'vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
 import squirrelData from '@/components/squirrelData.vue';
-/* async function dox() {
+
+const squirrels = ref('')
+async function dox() {
   let slop = await fetch("https://data.cityofnewyork.us/resource/vfnx-vebw.json?$limit=10")
   let data = await slop.json();
   squirrels.value = data;
   console.log(squirrels.value)
 }
- */
+
 
 const center ={ lat: 40.78292600137983, lng: -73.9654160492904 }
+
 
 export default {
   data() {
     return {
-      squ: [],
-      loaded: false
+      squ: []
     }
   },
-    onMounted: function(){
+  mounted: function(){
     this.dox()
-  },   
+  },
   methods: {
-
     dox: async function(){
-      try {
-        let slop = await fetch("https://data.cityofnewyork.us/resource/vfnx-vebw.json?$limit=10")
+  let slop = await fetch("https://data.cityofnewyork.us/resource/vfnx-vebw.json?$limit=10")
   let data = await slop.json();
-  this.squ = data;
+  this.squ = data.results;
   console.log(this.squ)
-  this.loaded = true
-      } catch (error) {
-        
-      }
- 
 }
 
     }
   } 
-
+  
+  
 
 
 

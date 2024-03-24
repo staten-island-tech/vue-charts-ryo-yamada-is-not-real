@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import { GoogleMap, Marker } from 'vue3-google-map'
 
 const props = defineProps({
     Squirrel: Object,
