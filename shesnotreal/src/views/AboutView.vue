@@ -11,9 +11,9 @@
         v-for="(idiots,i) in squ"
         :key="i"
         :options="{ position: {lat: idiots.geocoded_column.coordinates[1], lng:idiots.geocoded_column.coordinates[0] }}">
-        <InfoWindow>
+        <InfoWindow class="info">
         {{ idiots.unique_squirrel_id }}
-        <button class="pipebomb" @click="pipebomb(idiots)" >send pipebomb</button>
+        <br><button class="pipebomb" @click="pipebomb(idiots)" >send pipebomb</button>
       </InfoWindow>
     </Marker>
 
@@ -24,8 +24,6 @@
 
 <script>
 import { GoogleMap, Marker, InfoWindow } from 'vue3-google-map'
-import { ref, onBeforeMount, } from 'vue';
-
 export default {
   components:{
     GoogleMap,
@@ -53,6 +51,7 @@ export default {
       },
       pipebomb: function(squirrel){
         this.squ = this.squ.filter((t) => t !== squirrel)
+        this.audio.volume = .1
         this.audio.load()
         this.audio.play()
       } 
@@ -68,6 +67,9 @@ export default {
   position: absolute;
   top: 5vh;
   left: 5vw;
+}
+.pipebomb{
+  margin-top: 1vh;
 }
 
 </style>
