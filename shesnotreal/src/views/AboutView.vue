@@ -1,6 +1,4 @@
 <template>
-
-
     <div class="map">
   <GoogleMap api-key="AIzaSyAdB40-VhUUD6iG5RxtfbroGYMJk-Bn8m0" style="width: 35vw; height: 70vh; position: absolute; left: 32vw; top: 7vh;" :center="center"
   :zoom="15">
