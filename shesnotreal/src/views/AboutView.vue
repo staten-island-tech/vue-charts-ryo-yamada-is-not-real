@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="position: absolute; top:15vh; left: 25vw; width: 50vw;">
     <Bar :data="squirrels" :options="chartOptions" />
   </div>
 </template>

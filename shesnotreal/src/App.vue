@@ -1,6 +1,7 @@
 <template>
-  <RouterLink to="/">Map</RouterLink>
-        <RouterLink to="/about">Charts</RouterLink>
+  <RouterLink style="padding: 20px;" to="/">Map to send pipebombs</RouterLink>
+
+  <RouterLink style="padding: 20px;"  to="/about">Bar Graph of colors</RouterLink>
   <RouterView />
 </template>
 

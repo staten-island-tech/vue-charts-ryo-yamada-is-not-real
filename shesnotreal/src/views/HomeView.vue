@@ -1,10 +1,10 @@
 <template>
   <div class="map">
     <GoogleMap api-key="AIzaSyAdB40-VhUUD6iG5RxtfbroGYMJk-Bn8m0"
-      style="width: 35vw; height: 70vh; position: absolute; left: 32vw; top: 7vh;" :center="center" :zoom="14">
+      style="width: 35vw; height: 70vh; position: absolute; left: 32.5vw; top: 8vh;" :center="center" :zoom="14">
 
       <CustomControl position="TOP_LEFT">
-        <button class="custom-btn" @click="dox">DOX</button>
+        <button class="custom-btn" @click="dox">Dox</button>
       </CustomControl>
 
       <CustomControl position="TOP_LEFT">
