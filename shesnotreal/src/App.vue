@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <!-- <barchart></barchart> -->
-    <!-- <HomeView></HomeView> -->
-    <AboutView></AboutView>
-
-  </div>
+  <RouterLink to="/">Map</RouterLink>
+        <RouterLink to="/about">Charts</RouterLink>
+  <RouterView />
 </template>
 
 <script setup>
