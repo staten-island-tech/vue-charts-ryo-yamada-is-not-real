@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <Bar v-if="loaded" :data="squirrels" />
-    <p v-else> p</p>
+    <Bar :data="squirrels" :options="chartOptions" />
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, Colors } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -16,29 +16,51 @@ export default {
   components: { Bar },
   data(){
     return{
-      loaded:false,
-      squirrels: [],
+      squirrels: {
+        labels: x,
+        datasets: [{ 
+          data: y,
+          backgroundColor: ['#57595c', '#806d4d', '#000000'],
+          label: 'squirrel fur colors'
+        }],
+      },
+      chartOptions: {
+        responsive: true
+        },
     }
   },
+}
 
-  mounted: function(){
-    this.fetchData();
-  },
-
-  methods: {
-    fetchData: async function(){
-      try{
+const squirrel = ref('')
+async function data(){
         const result = await fetch(
-        'https://data.cityofnewyork.us/resource/vfnx-vebw.json?$limit=10'
+        'https://data.cityofnewyork.us/resource/vfnx-vebw.json'
         );
         const data = await result.json();
-        this.squirrels = data;
+        return data
+}
 
-        this.loaded = true
-      }catch(error){
-      console.log(error)
-    }
+squirrel.value = await data()
+
+//move the non-api things from fetch data to here
+
+const y = [0, 0, 0]
+const x = []
+console.log(squirrel.value)
+const squirrelValue = squirrel.value
+//squirrelValue.forEach((el) => hectare.push(el.hectare))
+for(let i=0; i< squirrelValue.length; i++){
+  if(
+    squirrelValue[i].hasOwnProperty('primary_fur_color') &&
+    !x.includes(squirrelValue[i].primary_fur_color)
+  ) {
+    x.push(squirrelValue[i].primary_fur_color)
+    y.push[i]
+  } else if (squirrelValue[i].hasOwnProperty('primary_fur_color')){
+    let index = x.indexOf(squirrelValue[i].primary_fur_color)
+    y[index]++
   }
+}
 
   // async mounted () {
   //   this.loaded = false
@@ -60,6 +82,6 @@ export default {
   //     console.error(e)
   //   }
   // }
-  }
-}
+  
+
 </script>
