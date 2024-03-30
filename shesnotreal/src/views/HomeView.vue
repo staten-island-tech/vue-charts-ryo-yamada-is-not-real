@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { GoogleMap, Marker, InfoWindow, CustomMarker, CustomControl, Circle  } from 'vue3-google-map'
+import { GoogleMap, Marker, InfoWindow, CustomMarker, CustomControl, Circle  } from '/node_modules/vue3-google-map'
 export default {
   components: {
     GoogleMap,
